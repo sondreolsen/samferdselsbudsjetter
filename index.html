@@ -167,6 +167,19 @@ tr.sum td{font-weight:bold;border-top:2px solid var(--line-2)}
   <div class="periods" id="period-tiles"></div>
 </section>
 
+<section id="aapnet">
+  <div class="sec-head">
+    <h2>Åpnet for trafikk, kilometer per år</h2>
+    <p>Ny riksvei åpnet for trafikk (Statens vegvesen, fra 2019 også Nye Veier) og nytt dobbeltspor tatt i bruk på jernbanen. Hold pekeren over søylene for firefeltsandel og hvilke jernbanestrekninger som ble åpnet.</p>
+  </div>
+  <div class="chart-card">
+    <div class="legend"><span><i style="background:var(--vei)"></i>Ny riksvei</span><span><i style="background:var(--bane)"></i>Nytt dobbeltspor jernbane</span></div>
+    <div class="chart-wrap"><canvas id="c-km"></canvas></div>
+    <p class="note" id="km-note"></p>
+  </div>
+  <div class="periods" id="km-tiles"></div>
+</section>
+
 <section id="region-vei">
   <div class="sec-head">
     <h2>Veiinvesteringer fordelt på region</h2>
@@ -368,6 +381,32 @@ document.getElementById("period-tiles").innerHTML=PERIODS.map((p,i)=>`
       <dt>Samlet</dt><dd>${mrd(pV[i]+pB[i])}${i?` (${pct(((pV[i]+pB[i])/(pV[i-1]+pB[i-1])-1)*100)})`:""}</dd>
       <dt>Jernbaneandel</dt><dd>${nb.format(pB[i]/(pV[i]+pB[i])*100)} %</dd></dl></div>`).join("")+
  `<p class="note" style="grid-column:1/-1">Prosent i parentes er endringen fra foregående periode.</p>`;
+
+// ---- Km åpnet per år ----
+const KM_YEARS=[2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+const KM_VEI =[null,154.0,45.2,83.4,62.3,60.3,203.5,143.1,23.0,71.0,13.2,58.2,60.4];
+const KM_FIRE=[10.6,63.3,9.3,6.2,14.1,6.7,83.4,66.4,8.2,42.0,0.2,2.4,null];
+const KM_NV  =[0,0,0,0,0,0,50,30,14,26,0,14.4,null];
+const KM_BANE=[0,0,17.0,14.3,0,22.8,0,8.0,0,22.0,13.5,0,10.0];
+const KM_BANE_TXT={2015:"Langset–Kleverud (Dovrebanen)",2016:"Holm–Holmestrand–Nykirke (Vestfoldbanen)",2018:"Farriseidet–Porsgrunn (Vestfoldbanen)",2020:"Nye Ulriken tunnel (Vossebanen), første spor",2022:"Follobanen Oslo–Ski. Dobbeltsporet Arna–Fløen ble fullført samme år",2023:"Venjar–Eidsvoll–Langset (Dovrebanen)",2025:"Drammen–Kobbervikdalen med Gulskogen (Vestfoldbanen)"};
+new Chart(document.getElementById("c-km"),{type:"bar",
+ data:{labels:KM_YEARS,datasets:[barDS("Ny riksvei",KM_VEI,css("--vei")),barDS("Nytt dobbeltspor jernbane",KM_BANE,css("--bane"))]},
+ options:{responsive:true,maintainAspectRatio:false,
+  scales:{x:{grid:{display:false},ticks:{color:css("--tick")},border:{color:css("--line-2")}},y:{grid:{color:css("--grid")},border:{display:false},ticks:{color:css("--tick"),callback:v=>v+" km"},beginAtZero:true}},
+  plugins:{legend:{display:false},tooltip:{...tip,callbacks:{
+    title:i=>"Åpnet i "+i[0].label,
+    label:c=>c.parsed.y==null?` ${c.dataset.label}: ikke oppgitt`:` ${c.dataset.label}: ${nb.format(c.parsed.y)} km`,
+    afterBody:items=>{const i=items[0].dataIndex,y=KM_YEARS[i],out=[];
+      if(items.some(t=>t.datasetIndex===0)){ if(KM_FIRE[i]!=null) out.push(`   herav firefelts vei: ${nb.format(KM_FIRE[i])} km`); if(KM_NV[i]>0) out.push(`   herav Nye Veier: ${nb.format(KM_NV[i])} km`); if(y===2025) out.push("   Statens vegvesen, ny og utbedret riksvei"); }
+      if(items.some(t=>t.datasetIndex===1)&&KM_BANE_TXT[y]) out.push("   "+KM_BANE_TXT[y]);
+      return out;}
+  }}}}});
+const kmV=sum(KM_VEI.filter(v=>v!=null)), kmB=sum(KM_BANE);
+document.getElementById("km-note").textContent="Samletallet for riksvei i 2013 er ikke oppgitt i kildene, bare firefeltsandelen på 10,6 km. Tallet for 2025 er Statens vegvesens «ny og utbedret riksvei» uten Nye Veier. Jernbane teller ny bane i store prosjekter, ikke kryssingsspor, stasjoner eller elektrifisering. Kilder: Statens vegvesens årsrapporter, Prop. 1 S.";
+document.getElementById("km-tiles").innerHTML=`
+ <div class="period"><div class="l">Riksvei 2014–2025</div><div class="s">Åpnet for trafikk</div><dl><dt>I alt</dt><dd>${nb.format(kmV)} km</dd><dt>Herav firefelts</dt><dd>${nb.format(sum(KM_FIRE.slice(1,12)))} km (2014–2024)</dd><dt>Største år</dt><dd>2019 (203,5 km)</dd></dl></div>
+ <div class="period"><div class="l">Jernbane 2013–2025</div><div class="s">Nytt dobbeltspor tatt i bruk</div><dl><dt>I alt</dt><dd>${nb.format(kmB)} km</dd><dt>Antall strekninger</dt><dd>7</dd><dt>Største år</dt><dd>2018 (22,8 km)</dd></dl></div>
+ <div class="period"><div class="l">Forholdet vei/bane</div><div class="s">2014–2025</div><dl><dt>Km vei per km bane</dt><dd>${nb.format(kmV/kmB)}</dd><dt>Planlagt bane 2026–2030</dt><dd>54 km</dd><dt>Planlagt firefelts vei 2026</dt><dd>36,7 km</dd></dl></div>`;
 
 // ---- Regions ----
 const RCOL=[css("--r1"),css("--r2"),css("--r3"),css("--r4"),css("--r5")];
