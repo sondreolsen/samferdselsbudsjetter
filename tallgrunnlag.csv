@@ -1,0 +1,47 @@
+Budsjettår;Statens vegvesen (mill. kr);Nye Veier (mill. kr);Vei i alt (mill. kr);Jernbane (mill. kr);Kilde
+2013;10971,4;0;10971,4;6088,0;Prop. 1 S (2012-2013) SD
+2014;12122,2;0;12122,2;9908,5;Prop. 1 S (2013-2014) SD
+2015;14497,1;0;14497,1;11174,7;Prop. 1 S (2014-2015) SD
+2016;16922,1;1000,0;17922,1;9662,9;Prop. 1 S (2015-2016) SD
+2017;16606,9;2075,2;18682,1;10236,3;Prop. 1 S (2016-2017) SD
+2018;16054,6;5278,8;21333,4;11034,0;Prop. 1 S (2017-2018) SD
+2019;15459,7;5431,9;20891,6;12141,7;Prop. 1 S (2018-2019) SD
+2020;15571,4;5605,7;21177,1;13172,6;Prop. 1 S (2019-2020) SD
+2021;13712,4;5785,1;19497,5;17278,1;Prop. 1 S (2020-2021) SD
+2022;14573,9;6435,5;21009,4;19075,5;Prop. 1 S (2021-2022) SD
+2023;13175,5;6103,1;19278,6;17532,5;Prop. 1 S (2022-2023) SD
+2024;14968,7;6507,7;21476,4;17366,1;Prop. 1 S (2023-2024) SD
+2025;17318,1;6755,0;24073,1;13612,2;Prop. 1 S (2024-2025) SD
+2026;18290,0;6998,2;25288,2;11170,1;Prop. 1 S (2025-2026) SD
+;;;;;
+Definisjoner;;;;;
+Vei (SVV);kap. 1320 post 29 OPS + 30 riksveiinvesteringer + 31 skredsikring riksvei (t.o.m. 2021) + 32 fellesprosjektet Arna-Stanghelle veidel (2026: 575) + 35 Bjørvika + 36 E16 Filefjell + 37 E6 vest for Alta;;;;
+Nye Veier;kap. 1321 post 70 tilskudd (2022 også post 71 særskilte infrastrukturprosjekter 500);;;;
+Jernbane;2013-2016: kap. 1350 post 30 + 31. 2017-2024: kap. 1352 post 72 + 73. 2025: post 73 11667,2 + (post 72 7445,0 - fornying 5500). 2026: post 73 8741,5 + (post 72 7853,6 - fornying 6000) + fellesprosjektet jernbanedel 575;;;;
+Merknad;Alle tall er regjeringens forslag (Forslag-kolonnen i Prop. 1 S), nominelle kroner;;;;
+;;;;;
+Regional fordeling (mill. kr, statlige midler til stedfestede prosjekter i Prop. 1 S);;;;;
+Budsjettår;Sektor;Østlandet;Vestlandet;Trøndelag;Nord-Norge;Agder
+2013;Vei;2075;1562;405;374;0
+2013;Jernbane;4375;196;0;7;0
+2014;Vei;2864;1286;105;1137;0
+2014;Jernbane;7365;851;154;0;0
+2015;Vei;3603;630;209;1628;0
+2015;Jernbane;7817;681;155;0;0
+2016;Vei;4730;634;258;1575;130
+2016;Jernbane;6378;363;170;0;0
+2017;Vei;3212;1166;120;1937;180
+2017;Jernbane;7444;775;138;0;0
+2018;Vei;1803;2200;285;2024;250
+2018;Jernbane;8526;716;0;0;0
+2019;Vei;1516;2055;450;1884;170
+2019;Jernbane;9555;475;200;0;0
+2020;Vei;1879;3023;825;1866;225
+2020;Jernbane;10256;655;141;0;0
+2021;Jernbane;13520;740;600;0;0
+2022;Jernbane;12430;1430;700;200;0
+2023;Jernbane;10670;1200;500;130;0
+2024;Jernbane;11160;552;500;0;0
+2025;Jernbane;10190;0;830;0;0
+2026;Jernbane;6370;575;790;0;0
+Merknad;Vei: fra budsjettåret 2021 oppgir ikke Prop. 1 S beløp per riksveiprosjekt (porteføljestyring), og regional fordeling kan ikke lages. Jernbane 2021-2026: anslått bruk per effektpakke/strekning fra omtalen av kap. 1352 post 73. Ufordelte midler (programområder, planlegging, ERTMS, banestrøm, OPS, Nye Veier) er ikke med i regionstallene.;;;;;
