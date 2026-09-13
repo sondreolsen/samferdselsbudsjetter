@@ -185,7 +185,7 @@ tr.sum td{font-weight:bold;border-top:2px solid var(--line-2)}
     <h2>Veiinvesteringer fordelt på region</h2>
     <p>Statlige midler til de store riksveiprosjektene, slik de er ført opp prosjekt for prosjekt i budsjettproposisjonene. Hvert prosjekt er plassert i regionen der veien ligger.</p>
   </div>
-  <div class="warn">Veifordelingen dekker budsjettårene 2013–2020. Fra og med budsjettet for 2021 gikk Samferdselsdepartementet over til porteføljestyring i tråd med Nasjonal transportplan 2022–2033, og Prop. 1 S oppgir ikke lenger beløp per riksveiprosjekt. Heller ikke tildelingsbrevene til Statens vegvesen, etatens årsrapporter eller Nye Veiers årsrapporter publiserer årlige beløp per prosjekt eller fylke. En regional fordeling av veiinvesteringene for 2021–2026 kan derfor ikke lages ut fra offentlige dokumenter. For jernbanen oppgir budsjettene fortsatt anslått bruk per strekning, se neste avsnitt.</div>
+  <div class="warn">Diagrammet har to lag. <strong>De fylte feltene</strong> er Statens vegvesens store prosjekter med beløp oppgitt i Prop. 1 S. De finnes bare for 2013–2020, fordi departementet gikk over til porteføljestyring fra 2021-budsjettet og siden ikke har oppgitt beløp per riksveiprosjekt. <strong>De lysere, stiplede feltene</strong> er tilskuddet til Nye Veier fordelt på regioner ved hjelp av en modell: hvert års tilskudd er delt på strekningene som var under bygging det året, vektet med avtalt kostnad delt på antall byggeår. Nye Veiers årsrapporter for 2016–2025 oppgir bare samlede prosjektkostnader, ikke forbruk per strekning, så laget er en beregning og ikke rapporterte tall.</div>
   <div class="grid2">
     <div class="chart-card">
       <h3>Per år, mrd. kr</h3>
@@ -193,7 +193,8 @@ tr.sum td{font-weight:bold;border-top:2px solid var(--line-2)}
       <div class="chart-wrap"><canvas id="c-reg-vei"></canvas></div>
     </div>
     <div class="chart-card">
-      <h3>Samlet 2013–2020, mrd. kr</h3>
+      <h3>Samlet per region, mrd. kr</h3>
+      <div class="legend"><span><i style="background:var(--muted)"></i>Statens vegvesen, stedfestet 2013–2020</span><span><i style="background:transparent;outline:1px dashed var(--muted)"></i>Nye Veier, modellert 2016–2026</span></div>
       <div class="chart-wrap"><canvas id="c-reg-vei-sum"></canvas></div>
     </div>
   </div>
@@ -233,6 +234,16 @@ tr.sum td{font-weight:bold;border-top:2px solid var(--line-2)}
     <p>Millioner kroner. «Ikke stedfestet» er midler budsjettet ikke knytter til et bestemt prosjekt eller en strekning: programområder, mindre tiltak, planlegging, ERTMS, OPS-vederlag og tilskuddet til Nye Veier. For 2025 og 2026 er jernbanens anslåtte bruk delvis finansiert av Bane NORs produksjonsgjeld til staten, og summen av strekningene kan derfor avvike fra bevilgningen.</p>
   </div>
   <div class="tbl-wrap"><table id="t-region"></table></div>
+  <div class="sec-head" style="margin-top:28px">
+    <h3>Nye Veier: modellert fordeling av tilskuddet per år</h3>
+    <p>Millioner kroner. Tilskuddet (kap. 1321) er fordelt på strekninger under bygging, vektet med kostnad per byggeår. Siste kolonne viser strekningen som får størst andel det året.</p>
+  </div>
+  <div class="tbl-wrap"><table id="t-nv-aar"></table></div>
+  <div class="sec-head" style="margin-top:28px">
+    <h3>Strekningene i modellen</h3>
+    <p>Byggeår er fra anleggsstart til åpning slik det er oppgitt i budsjettene og Nye Veiers rapporter. Kostnadsvekter merket med stjerne er anslag der budsjettet bare oppgir samlet avtalt vederlag for et større utbyggingsområde.</p>
+  </div>
+  <div class="tbl-wrap"><table id="t-nv"></table></div>
 </section>
 
 <section id="metode">
@@ -252,7 +263,8 @@ tr.sum td{font-weight:bold;border-top:2px solid var(--line-2)}
         <li><strong>Vei</strong> omfatter riksveiinvesteringer i Statens vegvesen (post 30), skredsikring riksvei (post 31, egen post til og med 2021), vederlag til OPS-prosjekter (post 29), Bjørvika (post 35), E16 over Filefjell (post 36), E6 vest for Alta (post 37), veidelen av Fellesprosjektet Arna–Stanghelle (post 32, 2026) og tilskuddet til Nye Veier (kap. 1321). Tilskudd til fylkesveier, byvekstavtaler, kollektivprosjekter, ferjer og drift og vedlikehold er ikke med.</li>
         <li><strong>Jernbane</strong> omfatter Jernbaneverkets investeringer i linjen og Follobanen (kap. 1350 post 30 og 31) til og med 2016, og deretter Jernbanedirektoratets kjøp av infrastrukturtjenester til planlegging og investeringer (kap. 1352 post 72 og 73). I 2025 og 2026 ble fornying og mindre investeringer samlet på ny post 72; her er bare andelen mindre investeringer tatt med (posten fratrukket oppgitt fornying på 5,5 og 6,0 mrd. kr). Merverdiavgift ført på egen post 76 i 2017 og 2018 er ikke med, i tråd med nettoordningen fra 2019.</li>
         <li><strong>Regioner:</strong> Østlandet er Oslo, Akershus, Østfold, Buskerud, Vestfold, Telemark, Hedmark og Oppland. Vestlandet er Rogaland, Hordaland, Sogn og Fjordane og Møre og Romsdal. Agder, Trøndelag og Nord-Norge følger fylkesgrensene. E39 Betna–Stormyra er lagt til Trøndelag, E16 Filefjell-parsellene til fylket de ligger i.</li>
-        <li><strong>Dekning:</strong> De prosjektfordelte beløpene dekker rundt en tredel av veiinvesteringene i 2013–2020 og mellom 70 og 85 prosent av jernbaneinvesteringene i 2013–2026. Nye Veiers utbygging av E18 og E39 i Agder og Telemark, E6 i Trøndelag og Innlandet ligger i den ufordelte delen, og Agder er derfor underrepresentert i veifordelingen.</li>
+        <li><strong>Dekning:</strong> De prosjektfordelte beløpene for Statens vegvesen dekker rundt en tredel av veiinvesteringene i 2013–2020, og de stedfestede jernbanebeløpene mellom 70 og 85 prosent av jernbaneinvesteringene i 2013–2026. Programområder, mindre tiltak, planlegging og OPS-vederlag er ikke fordelt.</li>
+        <li><strong>Nye Veier:</strong> Selskapets tilskudd er én sum i budsjettet, og årsrapportene for 2016–2025 oppgir ikke forbruk per strekning. Fordelingen er derfor modellert: tilskuddet hvert år er delt på strekningene under bygging, vektet med kostnad delt på antall byggeår. Kostnadene er avtalt vederlag eller prognose fra Prop. 1 S der de finnes per strekning, og ellers anslag innenfor de avtalte vederlagene for utbyggingsområdene. Strekninger med vekt merket stjerne i tabellen er anslag. Modellen fanger opp hvor Nye Veier har bygd, men ikke selskapets faktiske utbetalingstakt, som også styres av bompenger og av at deler av tilskuddet settes på konto til senere år.</li>
         <li><strong>Jernbane 2021–2026:</strong> Fordelingen bygger på setningene «Det anslås å bruke om lag … til …» per effektpakke i budsjettenes omtale av post 73, kontrollert mot rapporteringstabellene for 2023 og 2024 (Prop. 1 S for 2025 og 2026), der anslagene per effektpakke er gjengitt. ERTMS, banestrømforsyning, «Innfasing av nye fjerntog», «Økt kapasitet for kombigods Oslo–Narvik via Sverige» og planlegging av nye effektpakker er holdt som ikke stedfestet.</li>
       </ul>
     </div>
@@ -408,32 +420,70 @@ document.getElementById("km-tiles").innerHTML=`
  <div class="period"><div class="l">Jernbane 2013–2025</div><div class="s">Nytt dobbeltspor tatt i bruk</div><dl><dt>I alt</dt><dd>${nb.format(kmB)} km</dd><dt>Antall strekninger</dt><dd>7</dd><dt>Største år</dt><dd>2018 (22,8 km)</dd></dl></div>
  <div class="period"><div class="l">Forholdet vei/bane</div><div class="s">2014–2025</div><dl><dt>Km vei per km bane</dt><dd>${nb.format(kmV/kmB)}</dd><dt>Planlagt bane 2026–2030</dt><dd>54 km</dd><dt>Planlagt firefelts vei 2026</dt><dd>36,7 km</dd></dl></div>`;
 
+// ---- Nye Veier: modellert regional fordeling av tilskuddet ----
+// Tilskuddet hvert år fordeles på strekninger under bygging, vektet med kostnad delt på antall byggeår.
+// kost = mill. kr. dok=true: kostnaden er hentet fra Prop. 1 S eller Nye Veiers årsrapport. dok=false: anslag (merket i tabellen).
+const NV_PROJECTS=[
+ {navn:"E18 Tvedestrand–Arendal",region:"Agder",start:2016,slutt:2019,kost:4177,dok:true,kilde:"Prognose sluttkostnad, Prop. 1 S 2021"},
+ {navn:"E18 Rugtvedt–Dørdal",region:"Østlandet",start:2017,slutt:2019,kost:3329,dok:true,kilde:"Prognose sluttkostnad, Prop. 1 S 2021"},
+ {navn:"E6 Kolomoen–Moelv",region:"Østlandet",start:2016,slutt:2020,kost:8237,dok:true,kilde:"Sum av tre delstrekninger, Prop. 1 S 2021 og 2022"},
+ {navn:"E39 Kristiansand vest–Mandal øst",region:"Agder",start:2018,slutt:2022,kost:10800,dok:true,kilde:"Avtalt vederlag Kristiansand–Mandal 13 421 (Prop. 1 S 2020) fratrukket Mandal øst–Mandal by"},
+ {navn:"E39 Mandal øst–Mandal by",region:"Agder",start:2018,slutt:2021,kost:2600,dok:true,kilde:"Prognose sluttkostnad, Prop. 1 S 2023"},
+ {navn:"E6 Kvål–Melhus",region:"Trøndelag",start:2019,slutt:2022,kost:1521,dok:true,kilde:"Kostnadsoverslag, Prop. 1 S 2019"},
+ {navn:"E18 Langangen–Rugtvedt",region:"Østlandet",start:2020,slutt:2026,kost:9546,dok:true,kilde:"Avtalt vederlag, Prop. 1 S 2026"},
+ {navn:"E6 Ranheim–Værnes",region:"Trøndelag",start:2020,slutt:2028,kost:9634,dok:false,kilde:"Halvparten av avtalt vederlag Ranheim–Åsen 19 268 (Prop. 1 S 2026)"},
+ {navn:"E6 Kvithammar–Åsen",region:"Trøndelag",start:2020,slutt:2027,kost:9634,dok:false,kilde:"Halvparten av avtalt vederlag Ranheim–Åsen 19 268 (Prop. 1 S 2026)"},
+ {navn:"E6 Kvænangsfjellet",region:"Nord-Norge",start:2021,slutt:2024,kost:2139,dok:true,kilde:"Prop. 1 S 2024"},
+ {navn:"E6 Storhove–Øyer",region:"Østlandet",start:2022,slutt:2027,kost:2500,dok:false,kilde:"Anslag, del av avtalt vederlag Moelv–Øyer 24 607"},
+ {navn:"E6 Roterud–Storhove",region:"Østlandet",start:2023,slutt:2030,kost:10000,dok:false,kilde:"Anslag, del av avtalt vederlag Moelv–Øyer 24 607"},
+ {navn:"E39 Lyngdal øst–Lyngdal vest",region:"Agder",start:2022,slutt:2025,kost:2000,dok:false,kilde:"Anslag, del av avtalt vederlag Kristiansand vest–Lyngdal vest 33 581"},
+ {navn:"E39 Mandal–Blørstad",region:"Agder",start:2025,slutt:2028,kost:4500,dok:false,kilde:"Anslag, del av avtalt vederlag Kristiansand vest–Lyngdal vest 33 581"},
+ {navn:"E6 Berkåk–Vindåsliene",region:"Trøndelag",start:2025,slutt:2027,kost:3500,dok:false,kilde:"Anslag, del av avtalt vederlag Nedgård–Melhus 23 807"},
+ {navn:"E136 Veblungsnes, Stuguflåten–Raudstøl og rv. 13 Djupevik",region:"Vestlandet",start:2024,slutt:2026,kost:600,dok:false,kilde:"Anslag, mindre tiltak overført fra Statens vegvesen"}
+];
+const NV_REG={}; REGIONS.forEach(r=>NV_REG[r]=YEARS.map(()=>0));
+const NV_SHARE=YEARS.map(()=>({}));
+YEARS.forEach((y,i)=>{
+  if(!NV[i]) return;
+  const act=NV_PROJECTS.filter(p=>y>=p.start&&y<=p.slutt).map(p=>({p,w:p.kost/(p.slutt-p.start+1)}));
+  const W=sum(act.map(a=>a.w)); if(!W) return;
+  act.forEach(a=>{const v=NV[i]*a.w/W; NV_REG[a.p.region][i]+=v; NV_SHARE[i][a.p.navn]=v;});
+});
+
 // ---- Regions ----
 const RCOL=[css("--r1"),css("--r2"),css("--r3"),css("--r4"),css("--r5")];
+const hexA=(h,a)=>{const m=h.replace("#","");const n=m.length===3?m.split("").map(c=>c+c).join(""):m;return `rgba(${parseInt(n.slice(0,2),16)},${parseInt(n.slice(2,4),16)},${parseInt(n.slice(4,6),16)},${a})`;};
 const legendHTML=REGIONS.map((r,i)=>`<span><i style="background:${RCOL[i]}"></i>${r}</span>`).join("");
-document.getElementById("leg-reg-1").innerHTML=legendHTML; document.getElementById("leg-reg-2").innerHTML=legendHTML;
-function stacked(id,src,yrs){
+document.getElementById("leg-reg-1").innerHTML=legendHTML+`<span><i style="background:${hexA(RCOL[1],0.4)};outline:1px dashed ${RCOL[1]}"></i>Lysere felt: Nye Veier, modellert</span>`;
+document.getElementById("leg-reg-2").innerHTML=legendHTML;
+function stacked(id,src,yrs,extra){
+  const ds=REGIONS.map((r,i)=>({label:r,stack:"a",data:src[r].map(v=>v==null?null:v/1000),backgroundColor:RCOL[i],borderColor:css("--surface"),borderWidth:{top:2},maxBarThickness:46}));
+  if(extra){ REGIONS.forEach((r,i)=>ds.push({label:r+" – Nye Veier (modellert)",stack:"a",data:extra[r].map(v=>v?v/1000:null),backgroundColor:hexA(RCOL[i],0.4),borderColor:RCOL[i],borderWidth:1,borderDash:[3,2],maxBarThickness:46})); }
   new Chart(document.getElementById(id),{type:"bar",
-   data:{labels:yrs,datasets:REGIONS.map((r,i)=>({label:r,data:src[r].map(v=>v/1000),backgroundColor:RCOL[i],borderColor:css("--surface"),borderWidth:{top:2},maxBarThickness:46}))},
+   data:{labels:yrs,datasets:ds},
    options:{responsive:true,maintainAspectRatio:false,
     scales:{x:{stacked:true,grid:{display:false},ticks:{color:css("--tick")},border:{color:css("--line-2")}},y:{stacked:true,grid:{color:css("--grid")},border:{display:false},ticks:{color:css("--tick"),callback:v=>nb0.format(v)}}},
-    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{title:i=>"Budsjettåret "+i[0].label,label:c=>` ${c.dataset.label}: ${mrd(c.parsed.y*1000)}`,
+    plugins:{legend:{display:false},tooltip:{...tip,filter:c=>c.parsed.y!=null&&c.parsed.y>0,callbacks:{title:i=>"Budsjettåret "+i[0].label,label:c=>` ${c.dataset.label}: ${mrd(c.parsed.y*1000)}`,
       footer:items=>"Fordelt i alt: "+mrd(sum(items.map(t=>t.parsed.y))*1000)}}}}});
 }
-function regsum(id,src){
-  const tot=REGIONS.map(r=>sum(src[r]));
+function regsum(id,src,extra){
+  const tot=REGIONS.map(r=>sum(src[r].filter(v=>v!=null)));
   const order=REGIONS.map((r,i)=>i).sort((a,b)=>tot[b]-tot[a]);
+  const ds=[{label:extra?"Statens vegvesen, stedfestede prosjekter 2013–2020":"Stedfestet",data:order.map(i=>tot[i]/1000),backgroundColor:order.map(i=>RCOL[i]),borderRadius:{topRight:3,bottomRight:3},borderSkipped:"left",maxBarThickness:extra?22:40}];
+  if(extra){const t2=REGIONS.map(r=>sum(extra[r])); ds.push({label:"Nye Veier, modellert 2016–2026",data:order.map(i=>t2[i]/1000),backgroundColor:order.map(i=>hexA(RCOL[i],0.4)),borderColor:order.map(i=>RCOL[i]),borderWidth:1,borderDash:[3,2],borderRadius:{topRight:3,bottomRight:3},borderSkipped:"left",maxBarThickness:22});}
   new Chart(document.getElementById(id),{type:"bar",
-   data:{labels:order.map(i=>REGIONS[i]),datasets:[{data:order.map(i=>tot[i]/1000),backgroundColor:order.map(i=>RCOL[i]),borderRadius:{topRight:3,bottomRight:3},borderSkipped:"left",maxBarThickness:40}]},
+   data:{labels:order.map(i=>REGIONS[i]),datasets:ds},
    options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,
     scales:{x:{grid:{color:css("--grid")},border:{display:false},ticks:{color:css("--tick"),callback:v=>nb0.format(v)},beginAtZero:true},y:{grid:{display:false},border:{display:false},ticks:{color:css("--ink"),font:{size:13}}}},
-    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>` ${mrd(c.parsed.x*1000)} (${nb.format(c.parsed.x*1000/sum(tot)*100)} % av fordelte midler)`}}}}});
+    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>` ${c.dataset.label}: ${mrd(c.parsed.x*1000)}`}}}}});
 }
-stacked("c-reg-vei",REG_VEI,REG_YEARS); regsum("c-reg-vei-sum",REG_VEI);
+const REG_VEI_FULL={}; REGIONS.forEach(r=>REG_VEI_FULL[r]=YEARS.map((y,i)=>i<REG_YEARS.length?REG_VEI[r][i]:null));
+stacked("c-reg-vei",REG_VEI_FULL,YEARS,NV_REG); regsum("c-reg-vei-sum",REG_VEI,NV_REG);
 stacked("c-reg-bane",REG_BANE,BANE_YEARS); regsum("c-reg-bane-sum",REG_BANE);
+const covNV=YEARS.map((y,i)=>NV[i]?sum(REGIONS.map(r=>NV_REG[r][i]))/VEI[i]*100:0);
 const covV=REG_YEARS.map((y,i)=>sum(REGIONS.map(r=>REG_VEI[r][i]))/VEI[idx(y)]*100);
 const covB=BANE_YEARS.map((y,i)=>sum(REGIONS.map(r=>REG_BANE[r][i]))/BANE[idx(y)]*100);
-document.getElementById("cov-vei").textContent=`De stedfestede prosjektene utgjør mellom ${nb0.format(Math.min(...covV))} og ${nb0.format(Math.max(...covV))} prosent av veiinvesteringene i disse årene. Resten er programområder, mindre tiltak, planlegging, OPS-vederlag og Nye Veier, som budsjettet ikke fordeler geografisk.`;
+document.getElementById("cov-vei").textContent=`De stedfestede Statens vegvesen-prosjektene utgjør mellom ${nb0.format(Math.min(...covV))} og ${nb0.format(Math.max(...covV))} prosent av veiinvesteringene i 2013–2020. Det modellerte Nye Veier-laget utgjør hele tilskuddet til selskapet, mellom ${nb0.format(Math.min(...covNV.filter(v=>v>0)))} og ${nb0.format(Math.max(...covNV))} prosent av veiinvesteringene i 2016–2026. Resten er programområder, mindre tiltak, planlegging og OPS-vederlag, som budsjettet ikke fordeler geografisk. Fra 2021 finnes det ikke stedfestede tall for Statens vegvesen, så søylene for 2021–2026 viser bare Nye Veier.`;
 document.getElementById("cov-bane").textContent=`De stedfestede beløpene utgjør mellom ${nb0.format(Math.min(...covB))} og ${nb0.format(Math.max(...covB))} prosent av jernbaneinvesteringene per år. Resten er ERTMS (nytt signalsystem for hele landet), banestrømforsyning, mindre investeringer og planlegging av nye effektpakker, som budsjettet ikke knytter til en strekning.`;
 
 // ---- Tables ----
@@ -446,20 +496,30 @@ document.getElementById("t-data").innerHTML=t;
 let r=`<thead><tr><th>Budsjettår</th><th>Sektor</th>${REGIONS.map(x=>`<th>${x}</th>`).join("")}<th>Fordelt i alt</th><th>Ikke stedfestet</th><th>Investeringer i alt</th></tr></thead><tbody>`;
 BANE_YEARS.forEach((y,i)=>{
   const fb=sum(REGIONS.map(x=>REG_BANE[x][i]));
+  const fnv=sum(REGIONS.map(x=>NV_REG[x][i]));
   if(i<REG_YEARS.length){
     const fv=sum(REGIONS.map(x=>REG_VEI[x][i]));
-    r+=`<tr><td>${y}</td><td>Vei</td>${REGIONS.map(x=>`<td>${f0(REG_VEI[x][i])}</td>`).join("")}<td>${f0(fv)}</td><td>${f0(VEI[idx(y)]-fv)}</td><td>${f0(VEI[idx(y)])}</td></tr>`;
-    r+=`<tr><td></td><td>Jernbane</td>${REGIONS.map(x=>`<td>${f0(REG_BANE[x][i])}</td>`).join("")}<td>${f0(fb)}</td><td>${f0(BANE[idx(y)]-fb)}</td><td>${f0(BANE[idx(y)])}</td></tr>`;
+    r+=`<tr><td>${y}</td><td>Vei, Statens vegvesen</td>${REGIONS.map(x=>`<td>${f0(REG_VEI[x][i])}</td>`).join("")}<td>${f0(fv)}</td><td>${f0(VEI[idx(y)]-fv-fnv)}</td><td>${f0(VEI[idx(y)])}</td></tr>`;
   } else {
-    r+=`<tr><td>${y}</td><td>Vei</td><td colspan="${REGIONS.length+2}" style="text-align:left;color:var(--muted)">Ikke oppgitt per prosjekt i Prop. 1 S</td><td>${f0(VEI[idx(y)])}</td></tr>`;
-    r+=`<tr><td></td><td>Jernbane</td>${REGIONS.map(x=>`<td>${f0(REG_BANE[x][i])}</td>`).join("")}<td>${f0(fb)}</td><td>${f0(BANE[idx(y)]-fb)}</td><td>${f0(BANE[idx(y)])}</td></tr>`;
+    r+=`<tr><td>${y}</td><td>Vei, Statens vegvesen</td><td colspan="${REGIONS.length+1}" style="text-align:left;color:var(--muted)">Ikke oppgitt per prosjekt i Prop. 1 S</td><td>${f0(VEI[idx(y)]-fnv)}</td><td>${f0(VEI[idx(y)])}</td></tr>`;
   }
+  if(NV[i]) r+=`<tr><td></td><td>Vei, Nye Veier (modell)</td>${REGIONS.map(x=>`<td>${f0(NV_REG[x][i])}</td>`).join("")}<td>${f0(fnv)}</td><td></td><td></td></tr>`;
+  r+=`<tr><td></td><td>Jernbane</td>${REGIONS.map(x=>`<td>${f0(REG_BANE[x][i])}</td>`).join("")}<td>${f0(fb)}</td><td>${f0(BANE[idx(y)]-fb)}</td><td>${f0(BANE[idx(y)])}</td></tr>`;
 });
-const sV=REGIONS.map(x=>sum(REG_VEI[x])), sB=REGIONS.map(x=>sum(REG_BANE[x]));
+const sV=REGIONS.map(x=>sum(REG_VEI[x])), sB=REGIONS.map(x=>sum(REG_BANE[x])), sNV=REGIONS.map(x=>sum(NV_REG[x]));
 const veiTot8=sum(REG_YEARS.map(y=>VEI[idx(y)])), baneTot14=sum(BANE);
-r+=`<tr class="sum"><td>Sum vei 2013–2020</td><td>Vei</td>${sV.map(v=>`<td>${f0(v)}</td>`).join("")}<td>${f0(sum(sV))}</td><td>${f0(veiTot8-sum(sV))}</td><td>${f0(veiTot8)}</td></tr>`;
-r+=`<tr class="sum"><td>Sum jernbane 2013–2026</td><td>Jernbane</td>${sB.map(v=>`<td>${f0(v)}</td>`).join("")}<td>${f0(sum(sB))}</td><td>${f0(baneTot14-sum(sB))}</td><td>${f0(baneTot14)}</td></tr></tbody>`;
+r+=`<tr class="sum"><td>Sum 2013–2020</td><td>Vei, Statens vegvesen</td>${sV.map(v=>`<td>${f0(v)}</td>`).join("")}<td>${f0(sum(sV))}</td><td></td><td>${f0(veiTot8)}</td></tr>`;
+r+=`<tr class="sum"><td>Sum 2016–2026</td><td>Vei, Nye Veier (modell)</td>${sNV.map(v=>`<td>${f0(v)}</td>`).join("")}<td>${f0(sum(sNV))}</td><td></td><td>${f0(sum(NV))}</td></tr>`;
+r+=`<tr class="sum"><td>Sum 2013–2026</td><td>Jernbane</td>${sB.map(v=>`<td>${f0(v)}</td>`).join("")}<td>${f0(sum(sB))}</td><td>${f0(baneTot14-sum(sB))}</td><td>${f0(baneTot14)}</td></tr></tbody>`;
 document.getElementById("t-region").innerHTML=r;
+
+// Nye Veier-tabeller (modellgrunnlag)
+let nvy=`<thead><tr><th>Budsjettår</th><th>Tilskudd Nye Veier</th>${REGIONS.map(x=>`<th>${x}</th>`).join("")}<th>Største strekning i modellen</th></tr></thead><tbody>`;
+YEARS.forEach((y,i)=>{ if(!NV[i]) return; const top=Object.entries(NV_SHARE[i]).sort((a,b)=>b[1]-a[1])[0]; nvy+=`<tr><td>${y}</td><td>${f0(NV[i])}</td>${REGIONS.map(x=>`<td>${f0(NV_REG[x][i])}</td>`).join("")}<td style="text-align:left">${top?top[0]+" ("+f0(top[1])+")":""}</td></tr>`;});
+nvy+=`<tr class="sum"><td>Sum 2016–2026</td><td>${f0(sum(NV))}</td>${REGIONS.map(x=>`<td>${f0(sum(NV_REG[x]))}</td>`).join("")}<td></td></tr></tbody>`; document.getElementById("t-nv-aar").innerHTML=nvy;
+let nvt=`<thead><tr><th>Strekning</th><th>Region</th><th>Byggeår i modellen</th><th>Kostnadsvekt, mill. kr</th><th>Grunnlag</th></tr></thead><tbody>`;
+NV_PROJECTS.forEach(p=>{nvt+=`<tr><td>${p.navn}</td><td style="text-align:left">${p.region}</td><td>${p.start}–${p.slutt}</td><td>${f0(p.kost)}${p.dok?"":" *"}</td><td style="text-align:left;white-space:normal;color:var(--muted)">${p.kilde}</td></tr>`;});
+nvt+=`</tbody>`; document.getElementById("t-nv").innerHTML=nvt;
 </script>
 
 </body>
