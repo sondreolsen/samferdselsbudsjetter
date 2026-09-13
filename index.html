@@ -170,10 +170,10 @@ tr.sum td{font-weight:bold;border-top:2px solid var(--line-2)}
 <section id="aapnet">
   <div class="sec-head">
     <h2>Åpnet for trafikk, kilometer per år</h2>
-    <p>Ny riksvei åpnet for trafikk (Statens vegvesen, fra 2019 også Nye Veier) og nytt dobbeltspor tatt i bruk på jernbanen. Hold pekeren over søylene for firefeltsandel og hvilke jernbanestrekninger som ble åpnet.</p>
+    <p>Ny riksvei åpnet for trafikk, fordelt på Statens vegvesen og Nye Veier, og nytt dobbeltspor tatt i bruk på jernbanen. Hold pekeren over søylene for firefeltsandel og hvilke strekninger som ble åpnet.</p>
   </div>
   <div class="chart-card">
-    <div class="legend"><span><i style="background:var(--vei)"></i>Ny riksvei</span><span><i style="background:var(--bane)"></i>Nytt dobbeltspor jernbane</span></div>
+    <div class="legend"><span><i style="background:var(--vei)"></i>Ny riksvei, Statens vegvesen</span><span><i style="background:var(--nv);outline:1px solid var(--vei)"></i>Ny riksvei, Nye Veier</span><span><i style="background:var(--bane)"></i>Nytt dobbeltspor jernbane</span></div>
     <div class="chart-wrap"><canvas id="c-km"></canvas></div>
     <p class="note" id="km-note"></p>
   </div>
@@ -396,27 +396,33 @@ document.getElementById("period-tiles").innerHTML=PERIODS.map((p,i)=>`
 
 // ---- Km åpnet per år ----
 const KM_YEARS=[2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
-const KM_VEI =[null,154.0,45.2,83.4,62.3,60.3,203.5,143.1,23.0,71.0,13.2,58.2,60.4];
+// KM_VEI = ny riksvei i alt (Statens vegvesen + Nye Veier). KM_NV = Nye Veiers andel. 2025: SVV 60,4 (årsrapport) + Nye Veier 8 (152 km åpnet per 31.12.2025 mot 144 per 31.12.2024, Nye Veiers årsrapporter).
+const KM_VEI =[null,154.0,45.2,83.4,62.3,60.3,203.5,143.1,23.0,71.0,13.2,58.2,68.4];
 const KM_FIRE=[10.6,63.3,9.3,6.2,14.1,6.7,83.4,66.4,8.2,42.0,0.2,2.4,null];
-const KM_NV  =[0,0,0,0,0,0,50,30,14,26,0,14.4,null];
+const KM_NV  =[0,0,0,0,0,0,50,30,14,26,0,14.4,8.0];
+const KM_NV_TXT={2019:"E18 Tvedestrand–Arendal, E18 Rugtvedt–Dørdal, E6 Kolomoen–Kåterud",2020:"E6 Kåterud–Brumunddal, E6 Brumunddal–Moelv",2021:"E39 Mandal øst–Mandal by",2022:"E39 Kristiansand vest–Mandal øst, E6 Kvål–Melhus",2024:"E6 Kvænangsfjellet",2025:"E39 Lyngdal øst–Lyngdal vest"};
+const KM_SVV=KM_VEI.map((v,i)=>v==null?null:+(v-KM_NV[i]).toFixed(1));
 const KM_BANE=[0,0,17.0,14.3,0,22.8,0,8.0,0,22.0,13.5,0,10.0];
 const KM_BANE_TXT={2015:"Langset–Kleverud (Dovrebanen)",2016:"Holm–Holmestrand–Nykirke (Vestfoldbanen)",2018:"Farriseidet–Porsgrunn (Vestfoldbanen)",2020:"Nye Ulriken tunnel (Vossebanen), første spor",2022:"Follobanen Oslo–Ski. Dobbeltsporet Arna–Fløen ble fullført samme år",2023:"Venjar–Eidsvoll–Langset (Dovrebanen)",2025:"Drammen–Kobbervikdalen med Gulskogen (Vestfoldbanen)"};
 new Chart(document.getElementById("c-km"),{type:"bar",
- data:{labels:KM_YEARS,datasets:[barDS("Ny riksvei",KM_VEI,css("--vei")),barDS("Nytt dobbeltspor jernbane",KM_BANE,css("--bane"))]},
+ data:{labels:KM_YEARS,datasets:[
+   {label:"Ny riksvei, Statens vegvesen",stack:"vei",data:KM_SVV,backgroundColor:css("--vei"),maxBarThickness:34},
+   {label:"Ny riksvei, Nye Veier",stack:"vei",data:KM_NV.map(v=>v||null),backgroundColor:css("--nv"),borderColor:css("--vei"),borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:"bottom",maxBarThickness:34},
+   {label:"Nytt dobbeltspor jernbane",stack:"bane",data:KM_BANE,backgroundColor:css("--bane"),borderRadius:{topLeft:3,topRight:3},borderSkipped:"bottom",maxBarThickness:34}]},
  options:{responsive:true,maintainAspectRatio:false,
-  scales:{x:{grid:{display:false},ticks:{color:css("--tick")},border:{color:css("--line-2")}},y:{grid:{color:css("--grid")},border:{display:false},ticks:{color:css("--tick"),callback:v=>v+" km"},beginAtZero:true}},
-  plugins:{legend:{display:false},tooltip:{...tip,callbacks:{
+  scales:{x:{stacked:true,grid:{display:false},ticks:{color:css("--tick")},border:{color:css("--line-2")}},y:{stacked:true,grid:{color:css("--grid")},border:{display:false},ticks:{color:css("--tick"),callback:v=>v+" km"},beginAtZero:true}},
+  plugins:{legend:{display:false},tooltip:{...tip,filter:c=>c.parsed.y!=null,callbacks:{
     title:i=>"Åpnet i "+i[0].label,
-    label:c=>c.parsed.y==null?` ${c.dataset.label}: ikke oppgitt`:` ${c.dataset.label}: ${nb.format(c.parsed.y)} km`,
+    label:c=>` ${c.dataset.label}: ${nb.format(c.parsed.y)} km`,
     afterBody:items=>{const i=items[0].dataIndex,y=KM_YEARS[i],out=[];
-      if(items.some(t=>t.datasetIndex===0)){ if(KM_FIRE[i]!=null) out.push(`   herav firefelts vei: ${nb.format(KM_FIRE[i])} km`); if(KM_NV[i]>0) out.push(`   herav Nye Veier: ${nb.format(KM_NV[i])} km`); if(y===2025) out.push("   Statens vegvesen, ny og utbedret riksvei"); }
-      if(items.some(t=>t.datasetIndex===1)&&KM_BANE_TXT[y]) out.push("   "+KM_BANE_TXT[y]);
+      if(items.some(t=>t.datasetIndex<2)){ out.push(`   Ny riksvei i alt: ${nb.format(KM_VEI[i])} km`); if(KM_FIRE[i]!=null) out.push(`   herav firefelts vei: ${nb.format(KM_FIRE[i])} km`); if(KM_NV_TXT[y]) out.push("   Nye Veier: "+KM_NV_TXT[y]); if(y===2025) out.push("   Statens vegvesen-tallet gjelder ny og utbedret riksvei"); }
+      if(items.some(t=>t.datasetIndex===2)&&KM_BANE_TXT[y]) out.push("   "+KM_BANE_TXT[y]);
       return out;}
   }}}}});
-const kmV=sum(KM_VEI.filter(v=>v!=null)), kmB=sum(KM_BANE);
-document.getElementById("km-note").textContent="Samletallet for riksvei i 2013 er ikke oppgitt i kildene, bare firefeltsandelen på 10,6 km. Tallet for 2025 er Statens vegvesens «ny og utbedret riksvei» uten Nye Veier. Jernbane teller ny bane i store prosjekter, ikke kryssingsspor, stasjoner eller elektrifisering. Kilder: Statens vegvesens årsrapporter, Prop. 1 S.";
+const kmV=sum(KM_VEI.filter(v=>v!=null)), kmB=sum(KM_BANE), kmNV=sum(KM_NV);
+document.getElementById("km-note").textContent="Nye Veiers strekninger inngår i veisøylene fra selskapets første åpning i 2019 og er vist som eget, lysere felt. Samletallet for riksvei i 2013 er ikke oppgitt i kildene, bare firefeltsandelen på 10,6 km. For 2025 er Statens vegvesens tall «ny og utbedret riksvei» fra etatens årsrapport, mens Nye Veiers 8 km er endringen i selskapets åpnede veinett fra 144 til 152 km. Jernbane teller ny bane i store prosjekter, ikke kryssingsspor, stasjoner eller elektrifisering. Kilder: Statens vegvesens årsrapporter, Nye Veiers årsrapporter, Prop. 1 S.";
 document.getElementById("km-tiles").innerHTML=`
- <div class="period"><div class="l">Riksvei 2014–2025</div><div class="s">Åpnet for trafikk</div><dl><dt>I alt</dt><dd>${nb.format(kmV)} km</dd><dt>Herav firefelts</dt><dd>${nb.format(sum(KM_FIRE.slice(1,12)))} km (2014–2024)</dd><dt>Største år</dt><dd>2019 (203,5 km)</dd></dl></div>
+ <div class="period"><div class="l">Riksvei 2014–2025</div><div class="s">Åpnet for trafikk</div><dl><dt>I alt</dt><dd>${nb.format(kmV)} km</dd><dt>Herav Nye Veier</dt><dd>${nb.format(kmNV)} km (2019–2025)</dd><dt>Herav firefelts</dt><dd>${nb.format(sum(KM_FIRE.slice(1,12)))} km (2014–2024)</dd><dt>Største år</dt><dd>2019 (203,5 km)</dd></dl></div>
  <div class="period"><div class="l">Jernbane 2013–2025</div><div class="s">Nytt dobbeltspor tatt i bruk</div><dl><dt>I alt</dt><dd>${nb.format(kmB)} km</dd><dt>Antall strekninger</dt><dd>7</dd><dt>Største år</dt><dd>2018 (22,8 km)</dd></dl></div>
  <div class="period"><div class="l">Forholdet vei/bane</div><div class="s">2014–2025</div><dl><dt>Km vei per km bane</dt><dd>${nb.format(kmV/kmB)}</dd><dt>Planlagt bane 2026–2030</dt><dd>54 km</dd><dt>Planlagt firefelts vei 2026</dt><dd>36,7 km</dd></dl></div>`;
 
